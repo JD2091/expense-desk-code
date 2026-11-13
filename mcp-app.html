@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Expense Approval Desk</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: light-dark(#ffffff, #14161c);
+        --card: light-dark(#f5f6fa, #1e2129);
+        --text: light-dark(#1a1c22, #e9eaf0);
+        --muted: light-dark(#5d6170, #9ba0b0);
+        --line: light-dark(#dfe1e8, #2e323d);
+        --approve: #2f7d4f;
+        --reject: #b3403a;
+        --accent: #5b5bd6;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; font: 14px/1.45 system-ui, sans-serif; background: var(--bg); color: var(--text); }
+      main { padding: 16px; display: grid; gap: 12px; }
+      header { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+      h1 { font-size: 16px; margin: 0; }
+      #stats { color: var(--muted); }
+      .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 12px; display: grid; gap: 8px; }
+      .row { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+      .amount { font-weight: 600; font-variant-numeric: tabular-nums; }
+      .note, .meta { color: var(--muted); }
+      .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+      input { flex: 1; min-width: 160px; padding: 6px 8px; border-radius: 6px; border: 1px solid var(--line); background: var(--bg); color: var(--text); }
+      button { border: 0; border-radius: 6px; padding: 6px 12px; color: #fff; cursor: pointer; font: inherit; }
+      button:disabled { opacity: 0.5; cursor: wait; }
+      .approve { background: var(--approve); }
+      .reject { background: var(--reject); }
+      .ask { background: var(--accent); justify-self: start; }
+      #history li { color: var(--muted); }
+      #pending { display: grid; gap: 10px; }
+      #error { color: var(--reject); margin: 0; }
+      #error:empty { display: none; }
+      h2 { font-size: 15px; margin: 8px 0 0; }
+      #empty { color: var(--muted); }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Expense Approval Desk</h1>
+        <span id="stats">Waiting for data…</span>
+      </header>
+      <p id="error" role="alert"></p>
+      <section id="pending" aria-label="Pending claims"></section>
+      <p id="empty" hidden>No pending claims. Nice work.</p>
+      <button id="ask-btn" class="ask" type="button">Ask the assistant to draft a summary email</button>
+      <section aria-label="Decisions">
+        <h2>Decisions</h2>
+        <ul id="history"></ul>
+      </section>
+    </main>
+    <script type="module" src="/src/mcp-app.ts"></script>
+  </body>
+</html>
